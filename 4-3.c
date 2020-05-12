@@ -1,7 +1,12 @@
 #include <stdio.h>
 
+#include <stdbool.h>
+
 int main() {
 	
+	bool b = true;
+	bool t = false;
+		
 	int m,n;
 	scanf("%d %d",&m,&n);
 	int cnt = 0,sum = 0;
