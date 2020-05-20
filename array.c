@@ -1,5 +1,5 @@
 #include "array.h"
-
+#include <stdlib.h>
 
 Array array_create(int init_size) {
 	Array a;
