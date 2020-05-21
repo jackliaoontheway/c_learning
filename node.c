@@ -18,5 +18,12 @@ void add(List *pList, int number) {
 	}
 }
 
+void print(List *pList) {
+	Node *p;
+	for(p = list.head; p; p= p->next) {
+		printf("%d",p->value);
+	}
+
+}
 
 

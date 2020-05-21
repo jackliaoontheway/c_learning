@@ -11,5 +11,5 @@ typedef struct _list{
 } List; 
 
 void add(List *list, int number);
-
+void print(List *pList);
 #endif

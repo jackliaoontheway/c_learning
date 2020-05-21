@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 			add(&list,number);
 		}
 	} while(number != -1);
-
-
+	
+	
 	return 0;
 }
