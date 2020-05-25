@@ -9,12 +9,12 @@ struct Array {
 };
 
 void init_arr(struct Array * pArr,int length);
-bool append_arr();
-bool insert_arr();
+bool append_arr(struct Array *pArr,int number);
+bool insert_arr((struct Array *pArr,int pos,int val);
 bool delete_arr();
 int get();
-bool is_empty();
-bool is_full();
+bool is_empty(struct Array *pArr);
+bool is_full(struct Array *pArr);
 void sort_arr();
 void show_arr();
 void inversion_arr();
@@ -23,7 +23,7 @@ int main(int argslen, char * args []) {
 	
 	struct Array arr;
 	
-	init_arr(&arr,100);
+	init_arr(&arr,0);
 	
 	append_arr(&arr,1);
 	append_arr(&arr,2);
@@ -37,7 +37,7 @@ int main(int argslen, char * args []) {
 void init_arr(struct Array * pArr,int length) {
 	pArr->pBase = (int*)malloc(sizeof(int)*length);
 	if(pArr->pBase == NULL) {
-		printf("malloc error.");
+		printf("malloc error.\n");
 		//exit(-1);
 		return;
 	}
@@ -46,15 +46,22 @@ void init_arr(struct Array * pArr,int length) {
 }
 
 bool is_empty(struct Array *pArr) {
-	if(pArr -> cnt == 0) {
-		printf("Array is empty");
+	if(pArr->cnt == 0) {
 		return true;	
 	}
 	return false;
 }
 
+bool is_full(struct Array *pArr) {
+	if(pArr->cnt == pArr->len) {
+		return true;
+	} 
+	return false;
+}
+
 void show_arr(struct Array *pArr) {
 	if(is_empty(pArr)) {
+		printf("Array is empty\n");
 		return;	
 	}
 	int i;
@@ -64,6 +71,23 @@ void show_arr(struct Array *pArr) {
 }
 
 bool append_arr(struct Array *pArr,int number) {
+	if(is_full(pArr)) {
+		printf("Array is full\n");
+		return false;
+	}
 	pArr->pBase[pArr->cnt] = number;
-	pArr->cnt += 1;
+	(pArr->cnt)++;
+//	pArr->cnt += 1;
+}
+
+bool insert_arr((struct Array *pArr,int pos,int val){
+	if(is_full(pArr)) {
+		printf("Array is full\n");
+		return false;
+	}
+	int i ;
+	for(i = pArr->cnt -1; i >= pos-1; i--) {
+		pArr->pBase[i + 1] = pArr->pBase[i];
+	}
+	pArr->pBase[pos] = val;
 }
