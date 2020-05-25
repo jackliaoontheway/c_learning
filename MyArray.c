@@ -85,9 +85,12 @@ bool insert_arr((struct Array *pArr,int pos,int val){
 		printf("Array is full\n");
 		return false;
 	}
+	if(pos < 1) {
+		return false;
+	}
 	int i ;
 	for(i = pArr->cnt -1; i >= pos-1; i--) {
 		pArr->pBase[i + 1] = pArr->pBase[i];
 	}
-	pArr->pBase[pos] = val;
+	pArr->pBase[pos - 1] = val;
 }
