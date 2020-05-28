@@ -22,9 +22,9 @@ void inversion(Array *pArr);
 
 int main(int argslen, char *args[])
 {
-    Array array;          // 会自动分配内存
-    Array *pArr = &array; // 指针使用前必须有地址值
-    init(pArr, 4);
+    Array array;          
+    Array *pArr = &array;
+    init(pArr, 10);
     append(pArr, 2);
     append(pArr, 1);
     append(pArr, 3);
@@ -35,6 +35,13 @@ int main(int argslen, char *args[])
     inversion(pArr);
     show(pArr);
     sort(pArr);
+    show(pArr);
+    
+    insert(pArr,3,99);
+    int deleted;
+    delete(pArr,6,&deleted);
+    
+    printf("deleted : %d \n" ,deleted );
     show(pArr);
 
     return 0;
@@ -68,14 +75,41 @@ bool append(Array *pArr, int value)
 }
 
 bool insert(Array *pArr, int pos, int val)
-{
+{	
+	if(isFull(pArr)) {
+		printf("array is full.");
+		return false;
+	}
+	if(pos < 1 || pos > pArr->count) {
+		printf("insert error.");
+		return false;
+	}
+	int i;
+	for(i = pArr->count;i >= pos;i--) {
+		pArr->pData[i] = pArr->pData[i - 1];
+	}
 
+	pArr->pData[pos-1] = val;
+	pArr->count +=1;
     return true;
 }
 
 bool delete (Array *pArr, int pos, int *pVal)
 {
-
+	if(isEmpty(pArr)) {
+		printf("array is empty.");
+		return false;
+	}
+	if(pos < 1 || pos > pArr->count) {
+		printf("delete error.");
+		return false;
+	}
+	*pVal = pArr->pData[pos - 1];
+	int i;
+	for(i = pos-1; i < pArr->count - 1; i++) {
+		pArr->pData[i] = pArr->pData[i + 1];
+	}
+	pArr->count -=1;
     return true;
 }
 
