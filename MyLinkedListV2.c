@@ -101,6 +101,11 @@ bool insert(Node *pHead,Node **pTail,int pos,int val) {
 		return false;
 	}
 	
+	if(pos > length(pHead)) {
+		printf("insert error pos > length");
+		return false;
+	}
+	
 	Node *pNew = (Node*)malloc(sizeof(Node));
 	pNew->data = val;
 	pNew->pNext = NULL;
