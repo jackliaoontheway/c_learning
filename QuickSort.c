@@ -1,90 +1,46 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <malloc.h>
 
-typedef struct Node{
-    struct Node * pLChild;
-    struct Node * pRChild;
-    char data;
-} TreeNode;
+void quickSort(int *arr, int low, int high);
 
-TreeNode * createTree(void);
-void preTraverse(TreeNode *pTree);
-void inTraverse(TreeNode *pTree);
-void postTraverse(TreeNode *pTree);
+int main(int argslen, char *args[])
+{
 
+    int arr[] = {5, 4, 3, 2, 1};
+    quickSort(arr, 0, 4);
 
-void preTraverse(TreeNode *pTree) {
-    if(pTree == NULL) {
+    int i = 0, len = 5;
+    for (; i < len; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+    printf("\n");
+}
+
+void quickSort(int *arr, int low, int high)
+{
+    if (low >= high)
+    {
         return;
     }
-    printf("%c  " , pTree->data);
+    int val = arr[low];
+    int l = low;
+    int r = high;
+    while (l < r)
+    {
+        while (r > l && arr[r] >= val)
+        {
+            r--;
+        }
+        arr[l] = arr[r];
 
-    preTraverse(pTree->pLChild);
-    preTraverse(pTree->pRChild);
-}
-
-void inTraverse(TreeNode *pTree) {
-    if(pTree == NULL) {
-        return;
+        while (l < r && arr[l] <= val)
+        {
+            l++;
+        }
+        arr[r] = arr[l];
     }
-    inTraverse(pTree->pLChild);
-    printf("%c  " , pTree->data);
-    inTraverse(pTree->pRChild);
-}
-
-void postTraverse(TreeNode *pTree) {
-    if(pTree == NULL) {
-        return;
-    }
-    postTraverse(pTree->pLChild);
-    postTraverse(pTree->pRChild);
-    printf("%c  " , pTree->data);
-}
-
-int main(int argslen, char * args []) { 
-
-    TreeNode *pTree = createTree();
-    preTraverse(pTree);
-    printf("\n");
-    inTraverse(pTree);
-    printf("\n");
-    postTraverse(pTree);
-    printf("\n");
-    return 0;
-}
-
-TreeNode * createTree(void) {
-    TreeNode *pA = (TreeNode*)malloc(sizeof(TreeNode));
-    pA->data = 'A';
-    TreeNode *pB = (TreeNode*)malloc(sizeof(TreeNode));
-    pB->data = 'B';
-    TreeNode *pC = (TreeNode*)malloc(sizeof(TreeNode));
-    pC->data = 'C';
-    TreeNode *pD = (TreeNode*)malloc(sizeof(TreeNode));
-    pD->data = 'D';
-    TreeNode *pE = (TreeNode*)malloc(sizeof(TreeNode));
-    pE->data = 'E';
-    TreeNode *pF = (TreeNode*)malloc(sizeof(TreeNode));
-    pF->data = 'F';
-
-    pA->pLChild = pB;
-    pA->pRChild = pC;
-
-    pB->pLChild = pD;
-    pB->pRChild = pE;
-
-    pC->pLChild = NULL;
-    pC->pRChild = pF;
-
-    pD->pLChild = NULL;
-    pD->pRChild = NULL;
-
-    pE->pLChild = NULL;
-    pE->pRChild = NULL;
-
-    pF->pLChild = NULL;
-    pF->pRChild = NULL;
-
-    return pA;
+    arr[l] = val;
+    quickSort(arr, low, l - 1);
+    quickSort(arr, l + 1, high);
 }
