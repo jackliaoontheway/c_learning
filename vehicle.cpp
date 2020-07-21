@@ -2,7 +2,7 @@
 
 using namespace std;
 
- class vehicle {
+class vehicle {
     private :
         int maxspeed,weight;
         int const tire;
